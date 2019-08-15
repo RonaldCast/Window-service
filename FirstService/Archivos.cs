@@ -37,14 +37,48 @@ namespace FirstService
         // D onde se va a ejecutar el codigo
         private void stLapso_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            if (!EventLog.SourceExists("AplicationRC"))
+            {
+                EventLog.CreateEventSource("AplicationRC", "aplication");
+            }
             if (_BlBandera) return;
 
-            try
+            try 
             {
+                _BlBandera = true;
+
                 EventLog.WriteEntry("Se inicio proceso de copiado", EventLogEntryType.Information);
 
-                string stRutaOrigen = ConfigurationSettings.AppSettings["stRutaOrigen"];
+                string stRutaOrigen = ConfigurationSettings.AppSettings["stRutaOrigen"].ToString();
+                string stRutaDestino = ConfigurationSettings.AppSettings["stRutaDestino"].ToString();
+
                 DirectoryInfo dl = new DirectoryInfo(stRutaOrigen);
+
+                foreach (var archivos in dl.GetFiles("*",SearchOption.AllDirectories))
+                {
+                    if(File.Exists(stRutaDestino + archivos.Name)){
+                        File.SetAttributes(stRutaDestino + archivos.Name, 
+                            FileAttributes.Normal);
+                        File.Delete(stRutaDestino + archivos.Name);
+                    }
+
+                    File.Copy(stRutaOrigen + archivos.Name, stRutaDestino + archivos.Name);
+                    File.SetAttributes(stRutaDestino + archivos.Name, FileAttributes.Normal);
+
+                    if (File.Exists(stRutaDestino + archivos.Name))
+                    {
+                        EventLog.WriteEntry("Se copio archivo con exito", EventLogEntryType.Information);
+                    }
+                    else
+                    {
+                        EventLog.WriteEntry("No se copio el archivo con exito", EventLogEntryType.Information);
+
+                    }
+
+                    EventLog.WriteEntry("Se finalizo proceso de copiado", EventLogEntryType.Information);
+                }
+
+
             }
             catch (Exception ex)
             {

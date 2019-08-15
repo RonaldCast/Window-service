@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstService", "FirstService\FirstService.csproj", "{A020CC5B-5AAA-4945-B210-41CBAB73BB3B}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ServiceWindows.Installer", "ServiceWindows.Installer\ServiceWindows.Installer.vdproj", "{862FFCD1-35D5-486B-A35F-35396B2F0801}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{A020CC5B-5AAA-4945-B210-41CBAB73BB3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A020CC5B-5AAA-4945-B210-41CBAB73BB3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A020CC5B-5AAA-4945-B210-41CBAB73BB3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862FFCD1-35D5-486B-A35F-35396B2F0801}.Debug|Any CPU.ActiveCfg = Debug
+		{862FFCD1-35D5-486B-A35F-35396B2F0801}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
